@@ -2,6 +2,8 @@
 (function () {
 
     let gameBoard = document.querySelector('.left-side');
+    let utilities = document.querySelector('.right-side');
+    let allTreesTiles = document.querySelectorAll('.leaves');
 
     let logBtn = (e) => {
         console.log(e.target);
@@ -24,7 +26,6 @@
         [0, 1, 1, 1, 1, 0],
         [0, 1, 1, 1, 1, 1],
     ]
-
 
     for (let row = 0; row < 30; row++) {
         for (let col = 0; col < 40; col++) {
@@ -92,6 +93,29 @@
     }
 
 
+    //create right side
 
+    for (let i = 0; i < 4; i++) {
+        let tool = document.createElement('div');
+        tool.style.width = '120px';
+        tool.style.height = '120px';
+        tool.style.border = '3px solid';
+        tool.style.marginTop = '20px';
+        tool.classList.add('axe');
+        utilities.appendChild(tool);
+    }
+
+    let axe = document.querySelector('.axe');
+
+    axe.addEventListener('click', (e) => {
+        console.log(e);
+    })
+
+    console.log(allTreesTiles);
+    console.log(utilities);
+
+    allTreesTiles.forEach(tree => {
+        console.log(tree);
+    });
 
 })();
