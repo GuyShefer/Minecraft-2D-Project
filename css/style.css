@@ -1,0 +1,56 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.main .left-side {
+    width: 80vw;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: repeat(35,1fr);
+    grid-template-columns: repeat(40,1fr);
+    background: #809fff;
+}
+
+.main .right-side {
+    border: 3px solid blue;
+    width: 20%;
+    height: 100%;
+
+}
+
+.hoverOpacity:hover {
+    border: 1px solid #f3f3f3;
+}
+
+.cloud {
+    background: url(/img/cloud.png) no-repeat center center/cover;
+}
+
+.grass {
+    background: url(/img/grass.png) no-repeat center center/cover;
+}
+
+.rock {
+    background: url(/img/rock.png) no-repeat center center/cover;
+}
+
+.soil {
+    background: url(/img/soil.jpg) no-repeat center center/cover;
+}
+
+.leaves {
+    background: url(/img/tree-leaves.png) no-repeat center center/cover;
+}
+
+.wood {
+    background: url(/img/wood.png) no-repeat center center/cover;
+}
+
