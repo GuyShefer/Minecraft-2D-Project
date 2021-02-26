@@ -3,22 +3,19 @@
 
     let gameBoard = document.querySelector('.left-side');
     let utilities = document.querySelector('.right-side');
-    let destroy = true;
+    let destroy;
+    let currentWeapon = '';
+    let currentTile = '';
 
     let buildAndCreator = (e) => {
-        let cell = e.target.classList
-        console.log(e.target.getAttribute('class')); 
+        let cell = e.target.classList;
+        let tile = e.target.getAttribute('class');
+        // console.log("1",currentWeapon);
+        // console.log("2",currentTile);
         if (destroy) {
-            if (cell.contains('cloud') && currentWeapon === 'wind') {
-                cell.remove('cloud');
-            } else if (cell.contains('rock') && currentWeapon === 'pickAxe') {
-                cell.remove('rock');
-
-            } else if ((cell.contains('soil') || cell.contains('grass'))  && currentWeapon === 'shovel') {
-                cell.remove('soil', 'grass');
-            }
-             else if ((cell.contains('leaves') || cell.contains('wood'))  && currentWeapon === 'axe') {
-                cell.remove('leaves', 'wood');
+            if (currentWeapon[1].includes(tile)) {
+                // console.log(tile);
+                cell.remove(tile);
             }
         } else {
             // how to create?
@@ -29,20 +26,21 @@
         [0, 1, 1, 1, 0],
         [1, 1, 1, 1, 1],
         [0, 1, 1, 1, 0],
-    ]
+    ];
 
     const bush = [
         [0, 1, 0],
         [1, 1, 1],
         [1, 1, 1],
-    ]
+    ];
 
     const clouds = [
         [1, 1, 1, 1, 1, 0],
         [0, 1, 1, 1, 1, 0],
         [0, 1, 1, 1, 1, 1],
-    ]
+    ];
 
+    //creating the main board
     for (let row = 0; row < 30; row++) {
         for (let col = 0; col < 40; col++) {
 
@@ -54,41 +52,50 @@
                     cell.classList.add('leaves');
                 }
             }
+
             if (row > 17 && (row - 18) < 3 && (col - 7) < 5) {
                 if (tree[row - 18][col - 7] === 1) {
                     cell.classList.add('leaves');
                 }
             }
+
             if (row >= 21 && row < 25 && col === 24) {
                 cell.classList.add('wood');
             }
+
             if (row >= 21 && row < 25 && col === 9) {
                 cell.classList.add('wood');
             }
+
             //generate bushes
             if (row > 21 && (row - 22) < 3 && (col - 9) < 5) {
                 if (bush[row - 22][col - 11] === 1) {
                     cell.classList.add('leaves');
                 }
             }
+
             if (row > 21 && (row - 22) < 3 && (col - 29) < 5) {
                 if (bush[row - 22][col - 31] === 1) {
                     cell.classList.add('leaves');
                 }
             }
+
             // generate rocks
             if (row === 24 && col > 19 && col < 23) {
                 cell.classList.add('rock');
             }
+
             if (row === 24 && col === 1) {
                 cell.classList.add('rock');
             }
+
             // generate clouds
             if (row > 4 && (row - 5) < 3 && (col - 25) < 6) {
                 if (clouds[row - 5][col - 25] === 1) {
                     cell.classList.add('cloud');
                 }
             }
+
             if (row > 7 && (row - 8) < 3 && (col - 11) < 6) {
                 if (clouds[row - 8][col - 11] === 1) {
                     cell.classList.add('cloud');
@@ -98,60 +105,62 @@
             if (row === 25) {
                 cell.classList.add('grass');
             }
+
             if (row > 25) {
                 cell.classList.add('soil');
             }
 
-            // cell.classList.add('hover-class');
             cell.addEventListener('click', buildAndCreator);
             gameBoard.appendChild(cell);
         }
     }
 
     //create right side
-    let toolsArr = ['axe', 'pickAxe', 'shovel', 'wind'];
-    for (let i = 0; i < toolsArr.length; i++) {
-        let tool = document.createElement('div');
-        tool.style.width = '120px';
-        tool.style.height = '120px';
-        tool.style.border = '3px solid';
-        tool.style.marginTop = '20px';
-        tool.classList.add(toolsArr[i]);
-        utilities.appendChild(tool);
-        document.querySelector(`.${toolsArr[i]}`).addEventListener('click', (e) => {
-            console.log(e.target);
-            currentWeapon = toolsArr[i];
-        })
+    let toolsObj = {
+        'axe': ['wood', 'leaves'],
+        'pickAxe': ['rock'],
+        'shovel': ['soil', 'grass'],
+        'wind': ['cloud'],
     }
 
-    // let axe = document.querySelector('.axe');
-    // let pickAxe = document.querySelector('.pickAxe');
-    // let shovel = document.querySelector('.shovel');
-    // let wind = document.querySelector('.wind');
+    for (let i = 0; i < Object.entries(toolsObj).length; i++) {
 
-    // let currentWeapon = '';
+        let tool = document.createElement('div');
+        tool.classList.add(Object.keys(toolsObj)[i], 'style-tool');
+        utilities.appendChild(tool);
+        document.querySelector(`.${Object.keys(toolsObj)[i]}`).addEventListener('click', () => {
+            currentWeapon = Object.entries(toolsObj)[i];
+            destroy = true;
+        });
+    }
 
-    // axe.addEventListener('click', (e) => {
-    //     console.log(e.target);
-    //     currentWeapon = 'axe';
-    // });
-    // pickAxe.addEventListener('click', (e) => {
-    //     console.log(e.target);
-    //     currentWeapon = 'pickAxe';
-    // });
-    // shovel.addEventListener('click', (e) => {
-    //     console.log(e.target);
-    //     currentWeapon = 'shovel';
-    // });
-    // wind.addEventListener('click', (e) => {
-    //     console.log(e.target);
-    //     currentWeapon = 'wind';
-    // });
+    let inventory = document.createElement('div');
+    inventory.classList.add('style-inventory');
+    utilities.appendChild(inventory);
 
-    console.log(utilities, "asd");
+    let tilesObj = {
+        'woodTile': 0,
+        'leavesTile': 0,
+        'rockTile': 0,
+        'soilTile': 0,
+        'cloudTile': 0,
+        'grassTile': 0
+    }
 
-    // allTreesTiles.forEach(tree => {
-    //     console.log(tree);
-    // });
+    for (let i = 0; i < Object.entries(tilesObj).length; i++) {
+        let tile = document.createElement('div');
+
+        tile.classList.add(Object.keys(tilesObj)[i], 'tile');
+        inventory.appendChild(tile);
+        document.querySelector(`.${Object.keys(tilesObj)[i]}`).addEventListener('click', () => {
+            currentTile = Object.entries(tilesObj)[i];
+            console.log(Object.keys(tilesObj)[i]);
+            destroy = false;
+        });
+    }
+
+
+
+
 
 })();

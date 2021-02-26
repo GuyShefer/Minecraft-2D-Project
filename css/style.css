@@ -19,7 +19,7 @@
 }
 
 .main .right-side {
-    width: 20%;
+    width: 15%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -30,27 +30,57 @@
     border: 1px solid #f3f3f3;
 }
 
-.cloud {
+.style-tool {
+    width: 100px;
+    height: 100px;
+    border: 3px solid #000;
+    margin-top: 20px;
+}
+
+.style-tool:hover {
+    border: 5px solid #757575;
+}
+
+.style-inventory {
+    border: 1px solid black;
+    margin-top: 30px;
+    width: 100px;
+    height: 270px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tile {
+    width: 35px;
+    height: 35px;
+    border: 1px solid;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.cloud, .cloudTile {
     background: url(/img/cloud.png) no-repeat center center/cover;
 }
 
-.grass {
+.grass, .grassTile {
     background: url(/img/grass.png) no-repeat center center/cover;
 }
 
-.rock {
+.rock, .rockTile{
     background: url(/img/rock.png) no-repeat center center/cover;
 }
 
-.soil {
+.soil, .soilTile{
     background: url(/img/soil.jpg) no-repeat center center/cover;
 }
 
-.leaves {
+.leaves, .leavesTile {
     background: url(/img/tree-leaves.png) no-repeat center center/cover;
 }
 
-.wood {
+.wood, .woodTile {
     background: url(/img/wood.png) no-repeat center center/cover;
 }
 
