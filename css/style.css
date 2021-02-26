@@ -26,7 +26,7 @@
     align-items: center;
 }
 
-.hover-class:hover {
+.main .left-side div:hover {
     border: 1px solid #f3f3f3;
 }
 
@@ -56,5 +56,20 @@
 
 .axe {
     background: url(/img/axe.png) no-repeat center center/contain;
+    cursor: pointer;
+}
+
+.pickAxe {
+    background: url(/img/pickAxe.jpg) no-repeat center center/contain;
+    cursor: pointer;
+}
+
+.shovel {
+    background: url(/img/shovel.jpg) no-repeat center center/contain;
+    cursor: pointer;
+}
+
+.wind {
+    background: url(/img/wind.jpg) no-repeat center center/contain;
     cursor: pointer;
 }
