@@ -14,11 +14,14 @@
         // console.log("2",currentTile);
         if (destroy) {
             if (currentWeapon[1].includes(tile)) {
-                // console.log(tile);
                 cell.remove(tile);
             }
         } else {
-            // how to create?
+            // how to create a tile?
+            // have to check each tile amount in the inventoory
+            // have to decrease tile amount if all statement is work
+            // have to check if the user want to set new tile on 'occupied tile'...
+            //
         }
     }
 
@@ -115,7 +118,8 @@
         }
     }
 
-    //create right side
+    //create navbar
+
     let toolsObj = {
         'axe': ['wood', 'leaves'],
         'pickAxe': ['rock'],
@@ -124,11 +128,10 @@
     }
 
     for (let i = 0; i < Object.entries(toolsObj).length; i++) {
-
         let tool = document.createElement('div');
         tool.classList.add(Object.keys(toolsObj)[i], 'style-tool');
         utilities.appendChild(tool);
-        document.querySelector(`.${Object.keys(toolsObj)[i]}`).addEventListener('click', () => {
+        tool.addEventListener('click', () => {
             currentWeapon = Object.entries(toolsObj)[i];
             destroy = true;
         });
@@ -143,18 +146,21 @@
         'leavesTile': 0,
         'rockTile': 0,
         'soilTile': 0,
-        'cloudTile': 0,
-        'grassTile': 0
+        'cloudTile': 3,
+        'grassTile': 0,
     }
 
     for (let i = 0; i < Object.entries(tilesObj).length; i++) {
         let tile = document.createElement('div');
 
         tile.classList.add(Object.keys(tilesObj)[i], 'tile');
+        if (Object.keys(tilesObj)[i] === 'leavesTile') {
+            tile.style.color = '#fff';
+        }
         inventory.appendChild(tile);
-        document.querySelector(`.${Object.keys(tilesObj)[i]}`).addEventListener('click', () => {
+        tile.addEventListener('click', () => {
             currentTile = Object.entries(tilesObj)[i];
-            console.log(Object.keys(tilesObj)[i]);
+            tile.setAttribute('count', Object.values(tilesObj)[i]);
             destroy = false;
         });
     }

@@ -24,6 +24,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: #131313;
 }
 
 .main .left-side div:hover {
@@ -31,8 +32,8 @@
 }
 
 .style-tool {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border: 3px solid #000;
     margin-top: 20px;
 }
@@ -42,7 +43,6 @@
 }
 
 .style-inventory {
-    border: 1px solid black;
     margin-top: 30px;
     width: 100px;
     height: 270px;
@@ -55,9 +55,20 @@
 .tile {
     width: 35px;
     height: 35px;
-    border: 1px solid;
     margin-top: 10px;
     cursor: pointer;
+    position: relative;
+}
+
+.tile::after {
+    content: attr(count);
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'Courier New', Courier, monospace;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: inherit;
 }
 
 .cloud, .cloudTile {
@@ -86,20 +97,24 @@
 
 .axe {
     background: url(/img/axe.png) no-repeat center center/contain;
+    background-size: 100% 100%;
     cursor: pointer;
 }
 
 .pickAxe {
     background: url(/img/pickAxe.jpg) no-repeat center center/contain;
+    background-size: 100% 100%;
     cursor: pointer;
 }
 
 .shovel {
     background: url(/img/shovel.jpg) no-repeat center center/contain;
+    background-size: 100% 100%;
     cursor: pointer;
 }
 
 .wind {
     background: url(/img/wind.jpg) no-repeat center center/contain;
+    background-size: 100% 100%;
     cursor: pointer;
 }
