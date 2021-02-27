@@ -6,22 +6,55 @@
     let destroy;
     let currentWeapon = '';
     let currentTile = '';
+    let toolsObj = {
+        'axe': ['wood', 'leaves'],
+        'pickAxe': ['rock'],
+        'shovel': ['soil', 'grass'],
+        'wind': ['cloud'],
+    };
+    let tilesObj = {
+        'woodTile': 0,
+        'leavesTile': 0,
+        'rockTile': 0,
+        'soilTile': 0,
+        'cloudTile': 0,
+        'grassTile': 0,
+    };
+
 
     let buildAndCreator = (e) => {
         let cell = e.target.classList;
-        let tile = e.target.getAttribute('class');
+        let tileName = e.target.getAttribute('class');
         // console.log("1",currentWeapon);
         // console.log("2",currentTile);
         if (destroy) {
-            if (currentWeapon[1].includes(tile)) {
-                cell.remove(tile);
+            if (currentWeapon[1].includes(tileName)) {
+                let tileObjectKey = findTileObjectkey(Object.keys(tilesObj), tileName); // have to change from tileObjectKey to currentTile? 
+                tilesObj[tileObjectKey]++;
+                document.querySelector(`.${tileObjectKey}`).setAttribute('count', tilesObj[tileObjectKey]); 
+                cell.remove(tileName);
             }
         } else {
+            // console.log(currentTile);
+            // console.log(currentTile.includes('soilTile'));
+
+            // console.log(Object.entries(tilesObj)[1]) ;
+            // console.log(Object.entries(tilesObj)[1][0]) ;
+            // console.log(tilesObj[Object.entries(tilesObj)[1][0]]++) ;
+            console.log(currentTile[0]);
             // how to create a tile?
             // have to check each tile amount in the inventoory
             // have to decrease tile amount if all statement is work
             // have to check if the user want to set new tile on 'occupied tile'...
             //
+        }
+    }
+
+    let findTileObjectkey = (arr, tileName) => {
+        for(let i = 0 ;i< arr.length ; i++){
+            if(arr[i].includes(tileName)){
+                return arr[i];
+            }
         }
     }
 
@@ -120,13 +153,6 @@
 
     //create navbar
 
-    let toolsObj = {
-        'axe': ['wood', 'leaves'],
-        'pickAxe': ['rock'],
-        'shovel': ['soil', 'grass'],
-        'wind': ['cloud'],
-    }
-
     for (let i = 0; i < Object.entries(toolsObj).length; i++) {
         let tool = document.createElement('div');
         tool.classList.add(Object.keys(toolsObj)[i], 'style-tool');
@@ -141,15 +167,6 @@
     inventory.classList.add('style-inventory');
     utilities.appendChild(inventory);
 
-    let tilesObj = {
-        'woodTile': 0,
-        'leavesTile': 0,
-        'rockTile': 0,
-        'soilTile': 0,
-        'cloudTile': 3,
-        'grassTile': 0,
-    }
-
     for (let i = 0; i < Object.entries(tilesObj).length; i++) {
         let tile = document.createElement('div');
 
@@ -157,10 +174,11 @@
         if (Object.keys(tilesObj)[i] === 'leavesTile') {
             tile.style.color = '#fff';
         }
+        tile.setAttribute('count', Object.values(tilesObj)[i]);
         inventory.appendChild(tile);
         tile.addEventListener('click', () => {
             currentTile = Object.entries(tilesObj)[i];
-            tile.setAttribute('count', Object.values(tilesObj)[i]);
+            // tile.setAttribute('count', Object.values(tilesObj)[i]);
             destroy = false;
         });
     }
