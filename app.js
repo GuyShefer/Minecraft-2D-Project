@@ -12,7 +12,7 @@
         'shovel': ['soil', 'grass'],
         'wind': ['cloud'],
     };
-    let tilesObj = {
+    let tilesObj = {   /// have to change it to tilesInventory or somthing
         'woodTile': 0,
         'leavesTile': 0,
         'rockTile': 0,
@@ -20,40 +20,41 @@
         'cloudTile': 0,
         'grassTile': 0,
     };
+    let tilesArr = ['wood', 'leaves', 'rock', 'soil', 'grass', 'cloud'];
 
 
     let buildAndCreator = (e) => {
         let cell = e.target.classList;
         let tileName = e.target.getAttribute('class');
-        // console.log("1",currentWeapon);
-        // console.log("2",currentTile);
+
         if (destroy) {
             if (currentWeapon[1].includes(tileName)) {
                 let tileObjectKey = findTileObjectkey(Object.keys(tilesObj), tileName); // have to change from tileObjectKey to currentTile? 
                 tilesObj[tileObjectKey]++;
-                document.querySelector(`.${tileObjectKey}`).setAttribute('count', tilesObj[tileObjectKey]); 
+                document.querySelector(`.${tileObjectKey}`).setAttribute('count', tilesObj[tileObjectKey]);
                 cell.remove(tileName);
             }
-        } else {
-            // console.log(currentTile);
-            // console.log(currentTile.includes('soilTile'));
+        } else if (cell.length == 0 && tilesObj[currentTile[0]] > 0) {
+            let tileName = findTileName(currentTile[0], tilesArr);
+            e.target.classList.add(tileName);
+            tilesObj[currentTile[0]]--;
+            document.querySelector(`.${currentTile[0]}`).setAttribute('count', tilesObj[currentTile[0]]);
 
-            // console.log(Object.entries(tilesObj)[1]) ;
-            // console.log(Object.entries(tilesObj)[1][0]) ;
-            // console.log(tilesObj[Object.entries(tilesObj)[1][0]]++) ;
-            console.log(currentTile[0]);
-            // how to create a tile?
-            // have to check each tile amount in the inventoory
-            // have to decrease tile amount if all statement is work
-            // have to check if the user want to set new tile on 'occupied tile'...
-            //
         }
     }
 
     let findTileObjectkey = (arr, tileName) => {
-        for(let i = 0 ;i< arr.length ; i++){
-            if(arr[i].includes(tileName)){
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].includes(tileName)) {
                 return arr[i];
+            }
+        }
+    }
+
+    let findTileName = (tileName, tilesArr) => {
+        for (let i = 0; i < tilesArr.length; i++) {
+            if (tileName.includes(tilesArr[i])) {
+                return tilesArr[i];
             }
         }
     }
