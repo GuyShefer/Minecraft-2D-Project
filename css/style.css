@@ -10,6 +10,32 @@
     display: flex;
 }
 
+.body {
+    height: 100vh;
+    width: 100vw;
+    background: url(/img/background.jpg) no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.start-btn {
+    padding: 5px 40px;
+    font-size: 28px;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    background: #666666;
+    margin-top: 45px;
+    border: 1px solid #131313;
+    box-shadow: 0 0 20px black;
+    font-family: sans-serif;
+}
+
+.start-btn:hover {
+    background: #555555;
+}
+
 .main .left-side {
     flex-grow: 1;
     display: grid;
@@ -58,6 +84,11 @@
     margin-top: 10px;
     cursor: pointer;
     position: relative;
+    border: 2px solid #131313;
+}
+
+.tile:hover {
+    border: 2px solid #fff;
 }
 
 .tile::after {
@@ -69,6 +100,19 @@
     top: 0;
     left: 0;
     color: inherit;
+}
+
+.restart-btn {
+    width: 50px;
+    height: 50px;
+    margin-top: 40px;
+    background: url(/img/reset.png) no-repeat center center/cover;
+    cursor: pointer;
+    border: 2px solid #131313
+}
+
+.restart-btn:hover {
+    border: 2px solid #fff 
 }
 
 .cloud, .cloudTile {

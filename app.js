@@ -12,7 +12,7 @@
         'shovel': ['soil', 'grass'],
         'wind': ['cloud'],
     };
-    let tilesObj = {   /// have to change it to tilesInventory or somthing
+    let tilesInventoryObj = {
         'woodTile': 0,
         'leavesTile': 0,
         'rockTile': 0,
@@ -29,21 +29,20 @@
 
         if (destroy) {
             if (currentWeapon[1].includes(tileName)) {
-                let tileObjectKey = findTileObjectkey(Object.keys(tilesObj), tileName); // have to change from tileObjectKey to currentTile? 
-                tilesObj[tileObjectKey]++;
-                document.querySelector(`.${tileObjectKey}`).setAttribute('count', tilesObj[tileObjectKey]);
+                let tileObjectKey = findTileInventoryKey(Object.keys(tilesInventoryObj), tileName);
+                tilesInventoryObj[tileObjectKey]++;
+                document.querySelector(`.${tileObjectKey}`).setAttribute('count', tilesInventoryObj[tileObjectKey]);
                 cell.remove(tileName);
             }
-        } else if (cell.length == 0 && tilesObj[currentTile[0]] > 0) {
+        } else if (cell.length == 0 && tilesInventoryObj[currentTile[0]] > 0) {
             let tileName = findTileName(currentTile[0], tilesArr);
             e.target.classList.add(tileName);
-            tilesObj[currentTile[0]]--;
-            document.querySelector(`.${currentTile[0]}`).setAttribute('count', tilesObj[currentTile[0]]);
-
+            tilesInventoryObj[currentTile[0]]--;
+            document.querySelector(`.${currentTile[0]}`).setAttribute('count', tilesInventoryObj[currentTile[0]]);
         }
     }
 
-    let findTileObjectkey = (arr, tileName) => {
+    let findTileInventoryKey = (arr, tileName) => {
         for (let i = 0; i < arr.length; i++) {
             if (arr[i].includes(tileName)) {
                 return arr[i];
@@ -154,6 +153,7 @@
 
     //create navbar
 
+    //tools
     for (let i = 0; i < Object.entries(toolsObj).length; i++) {
         let tool = document.createElement('div');
         tool.classList.add(Object.keys(toolsObj)[i], 'style-tool');
@@ -164,25 +164,34 @@
         });
     }
 
+    
     let inventory = document.createElement('div');
     inventory.classList.add('style-inventory');
     utilities.appendChild(inventory);
 
-    for (let i = 0; i < Object.entries(tilesObj).length; i++) {
+    //tiles inventory
+    for (let i = 0; i < Object.entries(tilesInventoryObj).length; i++) {
         let tile = document.createElement('div');
 
-        tile.classList.add(Object.keys(tilesObj)[i], 'tile');
-        if (Object.keys(tilesObj)[i] === 'leavesTile') {
+        tile.classList.add(Object.keys(tilesInventoryObj)[i], 'tile');
+        if (Object.keys(tilesInventoryObj)[i] === 'leavesTile') {
             tile.style.color = '#fff';
         }
-        tile.setAttribute('count', Object.values(tilesObj)[i]);
+        tile.setAttribute('count', Object.values(tilesInventoryObj)[i]);
         inventory.appendChild(tile);
         tile.addEventListener('click', () => {
-            currentTile = Object.entries(tilesObj)[i];
-            // tile.setAttribute('count', Object.values(tilesObj)[i]);
+            currentTile = Object.entries(tilesInventoryObj)[i];
             destroy = false;
         });
     }
+
+    // creating restart button
+    let restartBtn = document.createElement('div');
+    restartBtn.classList.add('restart-btn');
+    restartBtn.addEventListener('click', ()=>{
+        document.location.reload()
+    });
+    utilities.appendChild(restartBtn)
 
 
 
