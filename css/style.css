@@ -162,3 +162,43 @@
     background-size: 100% 100%;
     cursor: pointer;
 }
+
+@media only screen and (max-width: 900px) and (orientation: landscape) {
+    .style-tool {
+        width: 40px;
+        height: 50px;
+        border: 1px solid #000;
+        margin-top: 5px;
+    }
+
+    .style-inventory {
+        margin-top: 5px;
+        height: 170px;
+    }
+    .tile {
+        width: 25px;
+        height: 25px;
+        margin-top: 5px;
+    }
+    .tile::after {
+        font-size: 12px;
+    }
+    .restart-btn {
+        width: 25px;
+        height: 25px;
+        margin: 10px 0;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .style-tool {
+        width: 40px;
+        height: 40px;
+    }
+    .style-inventory {
+        margin-top: 60px;
+    }
+    .restart-btn {
+        margin-top: 200px;
+    }
+}
