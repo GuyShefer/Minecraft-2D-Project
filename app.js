@@ -1,4 +1,3 @@
-
 (function () {
 
     let gameBoard = document.querySelector('.left-side');
@@ -192,9 +191,5 @@
         document.location.reload()
     });
     utilities.appendChild(restartBtn)
-
-
-
-
 
 })();
