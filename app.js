@@ -1,17 +1,17 @@
 (function () {
 
-    let gameBoard = document.querySelector('.left-side');
-    let utilities = document.querySelector('.right-side');
+    const gameBoard = document.querySelector('.left-side');
+    const utilities = document.querySelector('.right-side');
     let destroy;
     let currentWeapon = '';
     let currentTile = '';
-    let toolsObj = {
+    const toolsObj = {
         'axe': ['wood', 'leaves'],
         'pickAxe': ['rock'],
         'shovel': ['soil', 'grass'],
         'wind': ['cloud'],
     };
-    let tilesInventoryObj = {
+    const tilesInventoryObj = {
         'woodTile': 0,
         'leavesTile': 0,
         'rockTile': 0,
@@ -19,10 +19,10 @@
         'cloudTile': 0,
         'grassTile': 0,
     };
-    let tilesArr = ['wood', 'leaves', 'rock', 'soil', 'grass', 'cloud'];
+    const tilesArr = ['wood', 'leaves', 'rock', 'soil', 'grass', 'cloud'];
 
 
-    let buildAndCreator = (e) => {
+    const buildAndCreator = (e) => {
         let cell = e.target.classList;
         let tileName = e.target.getAttribute('class');
 
@@ -41,7 +41,7 @@
         }
     }
 
-    let findTileInventoryKey = (arr, tileName) => {
+    const findTileInventoryKey = (arr, tileName) => {
         for (let i = 0; i < arr.length; i++) {
             if (arr[i].includes(tileName)) {
                 return arr[i];
@@ -49,7 +49,7 @@
         }
     }
 
-    let findTileName = (tileName, tilesArr) => {
+    const findTileName = (tileName, tilesArr) => {
         for (let i = 0; i < tilesArr.length; i++) {
             if (tileName.includes(tilesArr[i])) {
                 return tilesArr[i];
